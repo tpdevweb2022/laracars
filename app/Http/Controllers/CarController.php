@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::paginate();
-        // dd($cars);
-        return view("cars.index", compact("cars")); // [ "cars" => $cars]
+        $cars = Car::orderBy("id", "desc")->paginate(30);
+        return view("cars.index", compact("cars"));
     }
 
     /**
@@ -35,9 +35,34 @@ class CarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        //
+        // $request->validate([
+        //     "brand" => "required",
+        //     "type" => "required",
+        //     "price" => "required",
+        //     "weight" => "required",
+        //     "power" => "required",
+        //     "energy" => "required",
+        //     "release_date" => ["required", "date"],
+        //     "thumbnail" => ["required", "url"],
+        // ]);
+
+        $car = new Car;
+        $car->brand = $request->brand;
+        $car->type = $request->type;
+        $car->price = $request->price;
+        $car->energy = $request->energy;
+        $car->power = $request->power;
+        $car->release_date = $request->release_date;
+        $car->weight = $request->weight;
+        $car->thumbnail = $request->thumbnail;
+        $car->save();
+
+        return redirect()->route("cars.index");
+
+
+        //dd($car);
     }
 
     /**
@@ -59,7 +84,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        $data = Car::select("*")->where(['id' => $car->id])->firstOrFail();
+        // dd($data);
+        return view("cars.edit", ["car" => $data]);
     }
 
     /**
