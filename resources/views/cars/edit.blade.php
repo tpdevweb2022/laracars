@@ -55,7 +55,7 @@
         </div>
         <div>
             <label for="thumbnail">Image URL</label>
-            <input type="url" id="thumbnail" name="thumbnail" required value="{{ $car->thumbnail }}"/> />
+            <input type="url" id="thumbnail" name="thumbnail" required value="{{ $car->thumbnail }}" />
             @error("thumbnail")
                 Remplis mieux que ça !
             @enderror

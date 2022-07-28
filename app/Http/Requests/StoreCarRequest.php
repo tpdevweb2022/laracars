@@ -26,11 +26,9 @@ class StoreCarRequest extends FormRequest
         return [
             "brand" => [
                 "required",
-                "min:3"
             ],
             "type" => [
                 "required",
-                "min:3"
             ],
             "price" => "required",
             "weight" => "required",
