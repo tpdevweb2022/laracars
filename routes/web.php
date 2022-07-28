@@ -20,11 +20,9 @@ Route::get('/about', [PagesController::class, "about"])->name("about");
 Route::get('/contact', [PagesController::class, "contact"])->name("contact-us");
 
 
-Route::get("/cars", [CarController::class, "index"])->name("cars.index");
-Route::get("/cars/create", [CarController::class, "create"])->name("cars.create");
-
-Route::post("/cars", [CarController::class, "store"])->name("cars.store");
-
-Route::get("/cars/{car}/edit", [CarController::class, "edit"])->name("cars.edit");
-Route::get("/cars/{car}", [CarController::class, "show"])->name("cars.show");
-// Route::resource("cars", CarController::class);
+// Route::get("/cars", [CarController::class, "index"])->name("cars.index");
+// Route::get("/cars/create", [CarController::class, "create"])->name("cars.create");
+// Route::post("/cars", [CarController::class, "store"])->name("cars.store");
+// Route::get("/cars/{car}/edit", [CarController::class, "edit"])->name("cars.edit");
+// Route::get("/cars/{car}", [CarController::class, "show"])->name("cars.show");
+Route::resource("cars", CarController::class);
