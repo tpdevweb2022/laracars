@@ -24,10 +24,10 @@ class StoreCarRequest extends FormRequest
     public function rules()
     {
         return [
-            "brand" => [
+            "brand_id" => [
                 "required",
             ],
-            "type" => [
+            "type_id" => [
                 "required",
             ],
             "price" => "required",

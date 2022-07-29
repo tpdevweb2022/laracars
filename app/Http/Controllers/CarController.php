@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
+use App\Models\Type;
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
 
 class CarController extends Controller
 {
@@ -27,7 +29,13 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view("cars.create");
+        // On récupère $brands qui contient toutes nos marques
+        $brands = Brand::all();
+        $types = Type::all();
+        return view("cars.create", [
+            "brands" => $brands,
+            "types" => $types,
+        ]);
     }
 
     /**
@@ -50,8 +58,8 @@ class CarController extends Controller
         // ]);
 
         $car = new Car;
-        $car->brand = $request->brand;
-        $car->type = $request->type;
+        $car->brand_id = $request->brand_id; // INT
+        $car->type_id = $request->type_id; // INT
         $car->price = $request->price;
         $car->energy = $request->energy;
         $car->power = $request->power;
@@ -97,9 +105,21 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(StoreCarRequest $request, Car $car)
     {
-        //
+        // $car = new Car;
+        $car = Car::select("*")->where(['id' => $car->id])->firstOrFail();
+        $car->brand_id = $request->brand_id;
+        $car->type_id = $request->type_id;
+        $car->price = $request->price;
+        $car->energy = $request->energy;
+        $car->power = $request->power;
+        $car->release_date = $request->release_date;
+        $car->weight = $request->weight;
+        $car->thumbnail = $request->thumbnail;
+        $car->save();
+
+        return redirect()->route("cars.show", $car->id);
     }
 
     /**

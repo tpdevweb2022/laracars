@@ -2,19 +2,27 @@
 
 @section("content")
     <h1>Ajouter une voiture</h1>
-    <form action={{ route("cars.store") }} method="POST">
+    <form action={{ route("cars.update", $car) }} method="POST">
         @csrf
+        @method("PUT")
         <div>
-            <label for="brand">Marque</label>
-            <input type="text" id="brand" name="brand" required value="{{ $car->brand }}" />
-            @error("brand")
+            <select name="brand_id" id="brand_id">
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                @endforeach
+            </select>
+            @error("brand_id")
                 Remplis mieux que ça !
             @enderror
         </div>
         <div>
             <label for="type">Modele</label>
-            <input type="text" id="type" name="type" required value="{{ $car->type }}" />
-            @error("type")
+            <select name="type_id" id="type_id">
+                @foreach($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+            @error("type_id")
                 Remplis mieux que ça !
             @enderror
         </div>

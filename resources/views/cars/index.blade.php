@@ -9,7 +9,7 @@
                 {{-- on affiche les données d'une $car --}}
                 <div class="car_detail">
                     <a href={{ route("cars.show", $car) }}>
-                        <h2>{{ $car->brand }} {{ $car->type }}</h2>
+                        <h2>{{ $car->brand->name }} {{ $car->type->name }}</h2>
                     </a>
                     <p>Ref : {{ $car->id }}</p>
                     <img src="{{ $car->thumbnail }}" alt="">

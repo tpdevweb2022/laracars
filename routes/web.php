@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CarController;
-use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,5 @@ Route::get('/', [PagesController::class, "home"])->name("home");
 Route::get('/about', [PagesController::class, "about"])->name("about");
 Route::get('/contact', [PagesController::class, "contact"])->name("contact-us");
 
-
-// Route::get("/cars", [CarController::class, "index"])->name("cars.index");
-// Route::get("/cars/create", [CarController::class, "create"])->name("cars.create");
-// Route::post("/cars", [CarController::class, "store"])->name("cars.store");
-// Route::get("/cars/{car}/edit", [CarController::class, "edit"])->name("cars.edit");
-// Route::get("/cars/{car}", [CarController::class, "show"])->name("cars.show");
 Route::resource("cars", CarController::class);
+Route::resource("brands", BrandController::class);

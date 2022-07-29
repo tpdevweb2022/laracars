@@ -17,14 +17,14 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
-            "brand"         => $this->faker->words(3, true),
-            "type"          => $this->faker->words(2, true),
-            "price"         => $this->faker->randomFloat(2, 0, 999_999),
-            "energy"        => $this->faker->word(),
-            "power"         => $this->faker->numberBetween(50, 600),
-            "release_date"  => $this->faker->date(),
-            "weight"        => $this->faker->numberBetween(600, 10_000),
-            "thumbnail"     => $this->faker->imageUrl(1024, 800)
+            "brand_id"              => $this->faker->numberBetween(1, 12),
+            "type_id"                 => $this->faker->numberBetween(1, 25),
+            "price"                     => $this->faker->randomFloat(2, 0, 999_999),
+            "energy"                  => $this->faker->word(),
+            "power"                   => $this->faker->numberBetween(50, 600),
+            "release_date"       => $this->faker->date(),
+            "weight"                  => $this->faker->numberBetween(600, 10_000),
+            "thumbnail"            => $this->faker->imageUrl(1024, 800)
         ];
     }
 }

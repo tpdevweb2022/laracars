@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string("brand"); // CONSTRAINT
-            $table->string("type"); // CONSTRAINT
+            $table->foreignId("brand_id")->constrained();
+            $table->foreignId("type_id")->constrained();
             $table->float("price", 8, 2, true);
             $table->string("energy"); // ENUM
             $table->integer("power", false, true);

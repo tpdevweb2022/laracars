@@ -5,16 +5,25 @@
     <form action={{ route("cars.store") }} method="POST">
         @csrf
         <div>
-            <label for="brand">Marque</label>
-            <input type="text" id="brand" name="brand" required value="{{ old("brand") }}" >
-            @error("brand")
+            <label for="brand_id">Marque</label>
+            {{-- On va boucler toutes les brands depuis $brands --}}
+            <select name="brand_id" id="brand_id">
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                @endforeach
+            </select>
+            @error("brand_id")
                 Remplis mieux que ça !
             @enderror
         </div>
         <div>
-            <label for="type">Modele</label>
-            <input type="text" id="type" name="type" required value="{{ old("type") }}" />
-            @error("type")
+            <label for="type_id">Modele</label>
+            <select name="type_id" id="type_id">
+                @foreach($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+            @error("type_id")
                 Remplis mieux que ça !
             @enderror
         </div>
